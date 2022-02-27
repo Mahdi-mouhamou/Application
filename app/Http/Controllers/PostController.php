@@ -9,8 +9,14 @@ class PostController extends Controller
 {
    public function index(){
 
-    $post=Post::all();
- 
+    $post= Post::find(1);
+    $post->update([
+        'title'=>'mahdi mouhamou jffjdjfjfjf'
+    ]);
+
+    $post=Post::orderby('title')->take(10)->get();
+    
+    
     
        return view('articles',[
            'posts'=>$post
@@ -43,7 +49,19 @@ class PostController extends Controller
    }
 
 
+   public  function create(){
+    return view('forme'); 
+ }
 
+ public function store(Request $request){
+
+    $post = new Post();
+    $post->title=$request->title;
+    $post->content=$request->content;
+    $post->save(); 
+
+
+ }
 
 
 
